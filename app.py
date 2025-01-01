@@ -1,6 +1,8 @@
 import os
 if 'OMP_NUM_THREADS' not in os.environ:
     os.environ['OMP_NUM_THREADS'] = '16'
+os.environ['GRADIO_TEMP_DIR'] = '/home/fanghaotian/3DGS/FreeSplatter/tmp'
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,2"
 import torch
 import gradio as gr
 from functools import partial
