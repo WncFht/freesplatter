@@ -39,3 +39,5 @@ rebuttal/
 apps/
 *.sh
 run.py
+
+tmp/
