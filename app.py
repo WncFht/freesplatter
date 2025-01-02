@@ -1,8 +1,9 @@
 import os
 if 'OMP_NUM_THREADS' not in os.environ:
     os.environ['OMP_NUM_THREADS'] = '16'
-os.environ['GRADIO_TEMP_DIR'] = '/home/fanghaotian/3DGS/FreeSplatter/tmp'
-os.environ["CUDA_VISIBLE_DEVICES"] = "1,2"
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['GRADIO_TEMP_DIR'] = '/home/lihong-project/htfang/freesplatter/tmp'
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import torch
 import gradio as gr
 from functools import partial

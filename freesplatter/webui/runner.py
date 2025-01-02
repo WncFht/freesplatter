@@ -312,6 +312,8 @@ class FreeSplatterRunner:
         save_gaussian(gaussians, gs_vis_path, freesplatter, opacity_threshold=5e-3, pad_2dgs_scale=True)
         print(f'Save gaussian at {gs_vis_path}')
 
+        torch.cuda.empty_cache() #test
+
         # render video
         with torch.inference_mode():
             c2ws_video = get_circular_cameras(N=120, elevation=0, radius=2.0, normalize=True).to(device)
@@ -330,7 +332,9 @@ class FreeSplatterRunner:
         print(f'Save video at {video_path}')
         t3 = time.time()
 
-        # extract mesh
+        torch.cuda.empty_cache() #test
+
+        # extract mesh 用 TSDF 融合算法
         with torch.inference_mode():
             c2ws_fusion = get_fibonacci_cameras(N=120, radius=2.0)
             c2ws_fusion, _ = normalize_cameras(c2ws_fusion, camera_position=torch.tensor([0., -2., 0.]), camera_system='opencv')
@@ -363,6 +367,8 @@ class FreeSplatterRunner:
                 fusion_images, fusion_depths, fusion_c2ws, fov, mesh_path, cam_elev_thr=-90)    # use all angles for tsdf fusion
             print(f'Save mesh at {mesh_path}')
             t4 = time.time()
+            
+        torch.cuda.empty_cache() #test
 
         # optimize texture
         cam_pos = c2ws_fusion[:, :3, 3].cpu().numpy()
